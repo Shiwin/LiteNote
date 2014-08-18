@@ -41,4 +41,4 @@ def create_note(request):
     else:
         form = forms.NoteForm()
         args['form'] = form
-        return render(request, 'lite_note/note_form_create.html',args)
+        return render(request, 'lite_note/note_create_form.html',args)

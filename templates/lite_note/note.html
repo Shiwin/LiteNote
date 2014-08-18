@@ -3,11 +3,13 @@
 {% block content %}
     <h1>{{ note.title }}</h1>
     <h2>{{ note.category }}</h2>
-     <p>{{ note.note }}</p>
+     <p>{{ note.note | safe}}</p>
 
     {{ date }}
 
     {% if  user  ==  note.author  %}
-
+        <div>
+            <input type="">
+        </div>
     {% endif %}
 {% endblock  %}
