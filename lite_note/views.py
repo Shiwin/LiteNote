@@ -7,22 +7,28 @@ from lite_note import models, forms
 from lite_note.models import Note
 
 
+def enter_anonymous_user(request):
+    return render(request,'lite_note/unknown_user.html')
+
 def home(request):
     if request.user.is_anonymous():
-        return render(request,'lite_note/uncnovn_user.html')
+        return HttpResponseRedirect('unknown/')
     else:
         notes = models.Note.objects.all().filter(author=request.user)
         return render(request, 'lite_note/index.html', {'notes': notes, })
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/unknown/')
 def note(request, id):
     item = models.Note.objects.get(pk=id)
-    return render(request, 'lite_note/note.html',
+    if request.user == item.author:
+        return render(request, 'lite_note/note.html',
                   {'note': item, 'date': item.create_date})
+    else:
+        return render(request,'lite_note/no_access.html')
 
 
-@login_required(login_url='login/')
+@login_required(login_url='/unknown/')
 def create_note(request):
     args = {}
     args.update(csrf(request))
