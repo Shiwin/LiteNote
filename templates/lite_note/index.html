@@ -1,0 +1,7 @@
+{% extends 'lite_note/main.html' %}
+
+{% block content %}
+    <ul>{% for note in notes %}
+        <li><a href={{ note.get_absolute_url }} >{{ note }}</a></li>
+        {% endfor %}</ul>
+{% endblock %}

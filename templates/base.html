@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LiteNote</title>
+{#    <link rel="stylesheet" type="text/css" href="css/layout.css">#}
+</head>
+<body>
+<h1><a href={% url 'home' %}>LiteNote</a></h1>
+<div class="login-and-logout">
+    {% block login-and-logout %}{% endblock %}
+</div>
+<div class="row">
+    {% block error %}{% endblock %}
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

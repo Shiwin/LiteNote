@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block login-and-logout %}
+    <div class="topbar">
+        <section class="top-bar-section">
+            <ul class="right">
+                {% if user.is_authenticated  %}
+                    <li><a href="/logout/">Выйти ({{ user.username }})</a></li>
+                    <li><a href="/create/">Добавить заметку</a> </li>
+                {% else %}
+                    <li><a href="/login/">Войти</a></li>
+                    <li><a href="/register/">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </section>
+    </div>
+{% endblock %}
