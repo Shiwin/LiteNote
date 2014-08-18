@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.context_processors import csrf
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
@@ -7,8 +8,11 @@ from lite_note.models import Note
 
 
 def home(request):
-    notes = models.Note.objects.all().filter(author=request.user)
-    return render(request, 'lite_note/index.html', {'notes': notes, })
+    if request.user.is_anonymous():
+        return render(request,'lite_note/uncnovn_user.html')
+    else:
+        notes = models.Note.objects.all().filter(author=request.user)
+        return render(request, 'lite_note/index.html', {'notes': notes, })
 
 
 @login_required(login_url='/login/')
