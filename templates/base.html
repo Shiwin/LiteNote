@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+{%  load static %}
 <html>
 <head>
     <title>LiteNote</title>
-{#    <link rel="stylesheet" type="text/css" href="css/layout.css">#}
+    <link rel="stylesheet" type="text/css" href="{% static "extjs4/resources/css/ext-all.css" %}">
+    <script type="text/javascript" src="{% static "extjs4/ext-all.js" %}"></script>
 </head>
 <body>
 <h1><a href={% url 'home' %}>LiteNote</a></h1>
