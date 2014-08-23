@@ -8,7 +8,7 @@ from lite_note.models import Note
 
 
 def enter_anonymous_user(request):
-    return render(request,'lite_note/unknown_user.html')
+    return render(request, 'lite_note/unknown_user.html')
 
 def home(request):
     if request.user.is_anonymous():
@@ -25,7 +25,7 @@ def note(request, id):
         return render(request, 'lite_note/note.html',
                   {'note': item, 'date': item.create_date})
     else:
-        return render(request,'lite_note/no_access.html')
+        return render(request, 'lite_note/no_access.html')
 
 
 @login_required(login_url='/unknown/')
