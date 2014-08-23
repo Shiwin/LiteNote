@@ -1,0 +1,17 @@
+header{
+    align-self: center;
+}
+
+aside {
+    background: #f0f0f0;
+    padding: 10px;
+    width: 200px;
+    float: left;
+
+   }
+
+article {
+    margin-right: 240px;
+    display: block;
+    float: left;
+  }

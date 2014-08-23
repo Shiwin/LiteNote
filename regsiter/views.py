@@ -19,4 +19,4 @@ def registration(request):
     else:
         form = UserCreationForm()
     args['form'] = form
-    return render_to_response('registration/registration_form.html', args)
+    return render_to_response('html/../templates/registration/registration_form.html', args)

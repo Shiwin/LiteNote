@@ -87,3 +87,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    # папка static должна быть на одном уровне с manage.py
+)

@@ -3,16 +3,18 @@
 <head>
     <title>LiteNote</title>
     <link rel="stylesheet" type="text/css" href="{% static "extjs4/resources/css/ext-all.css" %}">
+    <link rel="stylesheet" type="text/css" href="/static/css/noties.css">
     <script type="text/javascript" src="{% static "extjs4/ext-all.js" %}"></script>
 </head>
 <body>
-<h1><a href={% url 'home' %}>LiteNote</a></h1>
-<div class="login-and-logout">
+<header>
+    <h1><a href={% url 'home' %}>LiteNote</a></h1>
+</header>
+<aside>
     {% block login-and-logout %}{% endblock %}
-</div>
-<div class="row">
-    {% block error %}{% endblock %}
+</aside>
+<article>
     {% block content %}{% endblock %}
-</div>
+</article>
 </body>
 </html>
