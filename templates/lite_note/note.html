@@ -12,19 +12,7 @@
 
     {% if  user  ==  note.author  %}
         <div>
-            <input type="submit" value="Редактировать" id="edit">
-
-            {% if note.is_favorite %}
-                <input type="submit" value="Удалить из избранного" id="unfavorite">
-             {% else %}
-                <input type="submit" value="В избранное" id="favorite">
-             {% endif %}
-
-            {% if note.is_public %}
-                <input type="submit" value="Отменить публикацию" id="private">
-            {% else %}
-                <input type="submit" value="Опубликовать" id="public">
-            {% endif %}
+          <input type="submit" value="Редактировать" id="edit">
         </div>
     {% endif %}
 

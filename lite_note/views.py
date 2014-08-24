@@ -21,13 +21,20 @@ def home(request):
 
 @login_required(login_url='/unknown/')
 def note(request, id):
-    item = models.Note.objects.get(pk=id)
-    if request.user == item.author:
-        form = lite_note.forms.NoteCreateForm(instance=item)
-        return render(request, 'lite_note/note.html',
-                  {'form':form,'note':item})
+    if request.method == 'POST':
+        form = forms.NoteCreateForm(request.POST)
+        if form.is_valid():
+            note = models.Note.objects.get(pk=id)
+
+            return HttpResponseRedirect('/')
     else:
-        return render(request, 'lite_note/no_access.html')
+        item = models.Note.objects.get(pk=id)
+        if request.user == item.author or item.is_public:
+            form = lite_note.forms.NoteCreateForm(instance=item)
+            return render(request, 'lite_note/note.html',
+                  {'form':form,'note':item})
+        else:
+            return render(request, 'lite_note/no_access.html')
 
 
 @login_required(login_url='/unknown/')
@@ -41,7 +48,7 @@ def create_note(request):
         note.save()
         return HttpResponseRedirect('/')
     else:
-        form = forms.NoteCreateForm()
+        form = forms.NoteForm()
         args['form'] = form
         return render(request, 'lite_note/note_create_form.html',args)
 

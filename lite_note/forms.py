@@ -11,6 +11,8 @@ class NoteCreateForm(forms.ModelForm):
         fields = ('title', 'category', 'note', )
 
 class NoteForm(forms.ModelForm):
+    is_favorite = forms.BooleanField()
+    is_public = forms.BooleanField()
 
     class Meta:
         model = models.Note

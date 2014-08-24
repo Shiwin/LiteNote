@@ -3,12 +3,25 @@
 {% block content %}
     <div class="notes-list">
         {% for note in notes %}
-            <div>
-                <ol>
-                <div><a href="{{ note.get_absolute_url }}">{{ note.create_date | date }} {{ note.category }}
-                    {{ note.title }} <br></a> </div>
-                </ol>
-            </div>
+            <table>
+                <tr>
+                <th><a href="{{ note.get_absolute_url }}">{{ note.create_date | date }} {{ note.category }}
+                    {{ note.title }}  </a></th>
+                    <th><a href="delete/{{ note.id }}">Удалить</a></th>
+                    <th>{% if note.is_public %}
+                    <a href="private/{{ note.id }}">Отменить публикацию</a>
+                    {% else %}
+                    <a href="public/{{ note.id }}">Опубликовать</a>
+                    {% endif %}</th>
+
+                <th>{%if note.is_favorite  %}
+                    <a href="unfavorite/{{ note.id }}">Удалить из избранного</a>
+                    {% else %}
+                    <a href="favorite/{{ note.id }}">Добавить в избраное</a>
+                    {% endif %}</th>
+
+              </tr>
+            </table>
         {% endfor %}
     </div>
 {% endblock %}
