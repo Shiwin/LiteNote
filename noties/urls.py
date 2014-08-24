@@ -15,6 +15,7 @@ urlpatterns = patterns('',
                        url(r'^create/', 'lite_note.views.create_note', name='create_note'),
                        url(r'^unknown/', 'lite_note.views.enter_anonymous_user', name='enter_anonymous'),
 
-                       url(r'^request_login','regsiter.views.request_login'),
+                       url(r'^get_login','regsiter.views.request_login'),
                        url(r'^test','lite_note.views.new_home',name='new_home'),
+                       url(r'^get_notes','lite_note.views.new_note',name='new_note')
 )

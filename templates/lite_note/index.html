@@ -1,13 +1,14 @@
 {% extends 'lite_note/main.html' %}
 
-{% block list %}
-    <div class="notes-list" >
-    {% if notes|length == 0 %}
-        <p>Нет заметок</p>
-    {% else %}
-        <ul>{% for note in notes %}
-        <li><a href={{ note.get_absolute_url }} >{{ note }}</a></li>
-        {% endfor %}</ul>
-    {% endif %}
+{% block content %}
+    <div class="notes-list">
+        {% for note in notes %}
+            <div>
+                <ol>
+                <div><a href="{{ note.get_absolute_url }}">{{ note.create_date | date }} {{ note.category }}
+                    {{ note.title }} <br></a> </div>
+                </ol>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

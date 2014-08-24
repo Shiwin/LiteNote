@@ -1,15 +1,32 @@
 {% extends 'lite_note/main.html' %}
 
 {% block content %}
-    <h1>{{ note.title }}</h1>
-    <h2>{{ note.category }}</h2>
-     <p>{{ note.note | safe}}</p>
-
-    {{ date }}
+    <form action="" method="post">
+    {% csrf_token %}
+    Author:   {{ note.author }}
+    <br><br>
+     Create Time:    {{ note.create_date }}
+    <table>
+        {{ form.as_table }}
+    </table>
 
     {% if  user  ==  note.author  %}
         <div>
+            <input type="submit" value="Редактировать" id="edit">
 
+            {% if note.is_favorite %}
+                <input type="submit" value="Удалить из избранного" id="unfavorite">
+             {% else %}
+                <input type="submit" value="В избранное" id="favorite">
+             {% endif %}
+
+            {% if note.is_public %}
+                <input type="submit" value="Отменить публикацию" id="private">
+            {% else %}
+                <input type="submit" value="Опубликовать" id="public">
+            {% endif %}
         </div>
     {% endif %}
+
+    </form>
 {% endblock  %}

@@ -1,13 +1,17 @@
 from django.contrib.auth.models import User
 from django.db import models
-from lite_note import categories
 
+class Category(models.Model):
+    name = models.CharField(max_length=80,null=False)
+
+    def __str__(self):
+        return self.name
 
 class Note(models.Model):
     title = models.CharField(max_length=80)
     note = models.TextField()
     create_date = models.DateTimeField(auto_now_add=True)
-    category = models.CharField(max_length=80,default=categories.DEFAULT,choices=categories.CATEGORY)
+    category = models.ForeignKey(Category)
     is_favorite = models.BooleanField(default=False)
     is_public = models.BooleanField(default=False)
     author = models.ForeignKey(User, null=False)

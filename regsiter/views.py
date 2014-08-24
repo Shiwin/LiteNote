@@ -24,6 +24,7 @@ def registration(request):
     return render_to_response('registration/registration_form.html', args)
 
 def request_login(request):
+    """AJAX verison"""
     if request.method == 'POST':
         requser = request.POST['username']
         reqpass = request.POST['password']
