@@ -1,6 +1,7 @@
 {% extends 'lite_note/main.html' %}
 
-{% block content %}
+{% block list %}
+    <div class="notes-list" >
     {% if notes|length == 0 %}
         <p>Нет заметок</p>
     {% else %}
@@ -8,4 +9,5 @@
         <li><a href={{ note.get_absolute_url }} >{{ note }}</a></li>
         {% endfor %}</ul>
     {% endif %}
+    </div>
 {% endblock %}

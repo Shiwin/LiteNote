@@ -42,3 +42,13 @@ def create_note(request):
         form = forms.NoteForm()
         args['form'] = form
         return render(request, 'lite_note/note_create_form.html',args)
+
+
+
+def new_home(request):
+    """AJAX verison"""
+    if request.user.is_anonymous():
+        return render(request,'lite_note/new_index.html',{'notes':None,'user':request.user})
+    else:
+        notes = models.Note.objects.all().filter(author=request.user)
+        return render(request, 'lite_note/new_index.html', {'notes': note,'user':request.user })

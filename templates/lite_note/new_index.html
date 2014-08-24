@@ -1,0 +1,139 @@
+{% load static %}
+
+<html>
+<head>
+    <title>LiteNote</title>
+    <link rel="stylesheet" type="text/css" href="{% static "extjs4/resources/css/ext-all.css" %}">
+    <script type="text/javascript" src="{% static "extjs4/ext-all.js" %}"></script>
+<script type="text/javascript">
+Ext.require(["Ext.util.Cookies", "Ext.Ajax"], function(){
+    // Add csrf token to every ajax request
+    var token = Ext.util.Cookies.get('csrftoken');
+    if(!token){
+        Ext.Error.raise("Missing csrftoken cookie");
+    } else {
+        Ext.Ajax.defaultHeaders = Ext.apply(Ext.Ajax.defaultHeaders || {}, {
+            'X-CSRFToken': token
+        });
+    }
+});
+
+
+Ext.onReady(function(){
+   Ext.tip.QuickTipManager.init(); //init tooltip
+
+    //create a panel to login
+        var loginFormPanel = Ext.create('Ext.form.Panel', {
+        bodyPadding: 15,
+        defaults: { //applying default settings to all added items
+            anchor: '100%',
+            xtype: 'textfield',
+            vtype: 'alphanum',
+            allowBlank: false
+        },
+        fieldDefaults: {
+            labelWidth: 80,
+            labelAlign: 'left',
+            msgTarget: 'side'
+        },
+        items: [
+            {
+                name: 'username',
+                fieldLabel: 'User Name',
+                minLength: 3,
+                maxLength: 20
+            },
+            {
+                name: 'password',
+                fieldLabel: 'Password',
+                inputType: 'password',
+                minLength: 4,
+                maxLength: 16
+            }
+        ],
+        dockedItems: [
+            {
+                xtype: 'toolbar',
+                dock: 'bottom',
+                items: [
+                    { xtype: 'tbfill' },
+                    {
+                        xtype: 'button',
+                        itemId: 'cancel',
+                        text: 'Cancel',
+                        listeners: {
+                            click: function () {
+                                this.up('form').getForm().reset(); //reset all textfiled
+                            }
+                        }
+                    },
+                    {
+                        xtype: 'button',
+                        itemId: 'submit',
+                        formBind: true,
+                        text: "Submit",
+                        listeners: {
+                            click: function () {
+                                var formPanel = this.up('form');
+                                var user = formPanel.down('textfield[name=username]').getValue();
+                                var pass = formPanel.down('textfield[name=password]').getValue();
+
+                                if (formPanel.getForm().isValid()) {
+                                    Ext.Ajax.request({
+                                        url: 'request_login',
+
+                                        method: 'POST',
+                                        params: {
+                                            username: user,
+                                            password: pass
+                                        },
+                                        success: function (response, opts) {
+                                            var json = Ext.JSON.decode(response.responseText);
+                                            switch(json['result']) {
+                                                case 'success':{}
+                                        }
+                                        },
+                                        failure: function (response, opts) {
+                                            var json = Ext.JSON.decode(response.responseText);
+                                            Ext.Msg.alert('Failure', json['message']);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    });
+
+
+	var west=Ext.create('Ext.Panel', {
+			width: 300,
+			region: 'west',
+
+        items:[loginFormPanel,
+        {
+            xtype:'panel',
+            title:'Noties'
+        }]
+    });
+	var viewport = Ext.create('Ext.container.Viewport', {
+		layout : 'border',
+		items : [west,
+		{
+			region : 'north'
+		},
+		{
+			xtype : 'panel',
+			region : 'center'
+		}]
+	});
+});
+</script>
+</head>
+<body>
+</body>
+</html>
+
+</code>

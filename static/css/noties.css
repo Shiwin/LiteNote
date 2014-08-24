@@ -1,13 +1,14 @@
 header{
-    align-self: center;
+
 }
 
 aside {
     background: #f0f0f0;
     padding: 10px;
-    width: 200px;
+    width: 250px;
     float: left;
-
+    font-size: 15;
+    display: block;
    }
 
 article {
@@ -15,3 +16,8 @@ article {
     display: block;
     float: left;
   }
+
+.login{
+    display: inline-block;
+    margin: 10px;
+}
